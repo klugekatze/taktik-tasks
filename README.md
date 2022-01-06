@@ -14,7 +14,7 @@ Options for each task can be defined in dotenv file in format `X_OPTIONS` where 
 
 **COMPOSE_BINARY** default is `docker-compose`. Change it if you are using [Mutagen Compose](https://mutagen.io/documentation/orchestration/compose)
 
-**COMPOSE_OPTIONS** global docker-compose options, like filenames or env variables. Example: COMPOSE_OPTIONS=--env-file=/dev/null -f custom-compose.yaml
+**COMPOSE_OPTIONS** global docker-compose options, like filenames or env variables. Example: `COMPOSE_OPTIONS=--env-file=/dev/null -f custom-compose.yaml`
 
 ### Dotenv files
 
