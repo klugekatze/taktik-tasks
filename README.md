@@ -1,6 +1,6 @@
 # Taktik Tasks
 
-Taktik task is a [Taskfile](https://taskfile.dev) with predefined tasks.
+Taktik tasks is a [Taskfile](https://taskfile.dev) with predefined tasks.
 Can be used as a template file per project for docker based development routine automation
 
 ## Tasks
