@@ -1,0 +1,13 @@
+volumes:
+  code:
+
+x-mutagen:
+  sync:
+    defaults:
+      ignore:
+        vcs: true
+      mode: "two-way-resolved"
+    
+    code:
+      alpha: "."
+      beta: "volume://code"

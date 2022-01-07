@@ -4,7 +4,6 @@ silent: true
 
 dotenv:
   - ".taktik"
-  - ".taktik.local"
 
 vars:
   COMPOSE_BINARY: '{{.COMPOSE_BINARY | default "docker-compose"}}'
@@ -24,13 +23,27 @@ tasks:
     vars:
       COMMAND_OPTIONS: "{{.UP_OPTIONS}} {{.CLI_ARGS}}"
 
+  stop:
+    desc: "Stop services"
+    cmds:
+      - "{{.COMPOSE_COMMAND_STUB}} stop {{.COMMAND_OPTIONS}}"
+    vars:
+      COMMAND_OPTIONS: "{{.STOP_OPTIONS}} {{.CLI_ARGS}}"
+
+  start:
+    desc: "Stop services"
+    cmds:
+      - "{{.COMPOSE_COMMAND_STUB}} start {{.COMMAND_OPTIONS}}"
+    vars:
+      COMMAND_OPTIONS: "{{.START_OPTIONS}} {{.CLI_ARGS}}"
+
   down:
     desc: "Stops containers."
     cmds:
       - "{{.COMPOSE_COMMAND_STUB}} down {{.COMMAND_OPTIONS}}"
     vars:
       COMMAND_OPTIONS: "{{.DOWN_OPTIONS}} {{.CLI_ARGS}}"
-  
+
   build:
     desc: "Build or rebuild services."
     cmds:
@@ -38,12 +51,19 @@ tasks:
     vars:
       COMMAND_OPTIONS: "{{.BUILD_OPTIONS}} {{.CLI_ARGS}}"
 
+  restart:
+    desc: "Remove stopped containers"
+    cmds:
+      - "{{.COMPOSE_COMMAND_STUB}} restart {{.COMMAND_OPTIONS}}"
+    vars:
+      COMMAND_OPTIONS: "{{.RESTART_OPTIONS}} {{.CLI_ARGS}}"
+
   rebuild:
     desc: "Rebuild containers: down, build. up"
     cmds:
-      - task: down
+      - task: stop
       - task: build
-      - task: up
+      - task: start
 
   logs:
     desc: "View output from containers."
@@ -52,9 +72,29 @@ tasks:
     vars:
       COMMAND_OPTIONS: "{{.LOGS_OPTIONS}} {{.CLI_ARGS}}"
   
+
   exec:
     desc: Execute a command in a running container
     cmds:
       - "{{.COMPOSE_COMMAND_STUB}} exec {{.COMMAND_OPTIONS}}"
     vars:
       COMMAND_OPTIONS: "{{.EXEC_OPTIONS}} {{.CLI_ARGS}}"
+
+  exec:php:
+    desc: Exec into php container
+    cmds:
+      - "{{.COMPOSE_COMMAND_STUB}} exec -w /app php zsh"
+
+  php:
+    desc: Run php in container
+    cmds:
+      - "{{.COMPOSE_COMMAND_STUB}} exec -w /app php php {{.COMMAND_OPTIONS}}"
+    vars:
+      COMMAND_OPTIONS: "{{.PHP_OPTIONS}} {{.CLI_ARGS}}"
+
+  composer:
+    desc: Composer
+    cmds:
+      - "{{.COMPOSE_COMMAND_STUB}} exec -w /app php composer {{.COMMAND_OPTIONS}}"
+    vars:
+      COMMAND_OPTIONS: "{{.COMPOSER_OPTIONS}} {{.CLI_ARGS}}"

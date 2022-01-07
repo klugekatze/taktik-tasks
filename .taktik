@@ -1,2 +1,2 @@
 UP_OPTIONS=-d
-COMPOSE_OPTIONS=--env-file=/dev/null -f docker-compose.yaml -f docker-compose.one.yaml -f docker-compose.two.yaml
+COMPOSE_OPTIONS=--env-file=/dev/null -f docker-compose.yaml

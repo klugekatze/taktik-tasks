@@ -1,11 +1,50 @@
 # Taktik Tasks
 
-Taktik tasks is a [Taskfile](https://taskfile.dev) with predefined tasks.
-Can be used as a template file per project for docker based development routine automation
+> This project is under development, files and templates can change without compatibility.
+
+Taktik Tasks is template of [Taskfile](https://taskfile.dev) with predefined tasks and scripts to provision docker container for local docker-compose based development, mostly for php symfony applications.
+
+## Motivation
+
+My primary development environment were vagrant based VirtualBox VM. It still nice, provide food shell experience and isolation, hovewer, VirtualBox is not compatible with Apple M1 chip. I tried many tools: self-made shell scripts, node with google zx library, Lando and others. Shell scripts quickly become a unmaintainable. Node scripts require installing dependencies if. The most successful is Lando. Hoverer, the number of custom cludges I had to put for Lando become too quickly too big. In addition, мery poor performance on mounted volumes mac os and the impossibility / high complexity of the configuration forced to look for other tools. From Lando I like an Idea of yaml config and tooling feature.
+
+## Quick start
+
+Install Taskfile
+
+Requirements:
+
+* docker
+* docker-compose
+* Taskfile
+
+```shell
+brew install go-task/tap/go-task
+```
+
+To improve MacOS volumen performance, install [Mutagen Compose](https://mutagen.io/documentation/orchestration/compose), replace override `COMPOSE_BINARY` and add `docker-compose.macosx.yaml` to `COMPOSE_OPTIONS` in `.taktik` dotenv file.
+
+Optionally, create an alias to `task` binary as a `taktik` for shell
+
+`~/.zshrc` or `~/.bashrc`
+
+```zsh
+alias taktik=task
+```
 
 ## Tasks
 
-Small subset of `docker-compose` tasks is defined. Tasks options can be extended with environment variables. All commands can be configured with environment variables, in addition, CLI arguments can be forwarded. Usage `task up -- -d`
+Some main tasks of `docker-compose` tasks are defined. Taskfile template should be edited according to project needs and more tasks can be added.
+
+Small subset of . Tasks options can be extended with environment variables. All commands can be configured with environment variables, in addition, CLI arguments can be forwarded. Usage `task up -- -d`
+
+## Scripts
+
+Most of scripts are borrowed from [VS Code Remote script library](https://github.com/microsoft/vscode-dev-containers/tree/main/script-library).
+
+## PHP configs
+
+These are development configs to use with PHP and PHP-FPM.
 
 ## Variables
 
@@ -18,5 +57,4 @@ Options for each task can be defined in dotenv file in format `X_OPTIONS` where 
 
 ### Dotenv files
 
-All variables can be overridden in dotenv files. Define environment variables in `.taktik` and commit into the project
-Use `.taktik.local` file to override variables locally from dist `.taktik` file, add this file into project `.gitignore`.
+All variables can be overridden in dotenv files. Define environment variables in `.taktik` and dut do not commit into the project. use `.taktik.dist` to provide env var examples of recommendations.

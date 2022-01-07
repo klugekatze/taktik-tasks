@@ -1,16 +1,38 @@
 version: '3.6'
 services:
-  redis:
-    image: redis:6
+  php:
+    image: sunthera/taktik:dev
+    build:
+      context: .
+      dockerfile: Dockerfile.taktik
+    entrypoint:
+      - bash
+      - /taktik/php/entrypoint.sh
     command:
-      - 'redis-server'
-      - '--loglevel notice'
-      - '--databases 1'
-      - '--maxmemory 128mb'
-      - '--maxmemory-policy volatile-lru'
-      - '--bind 0.0.0.0'
+      - php-fpm
     volumes:
-      - redis:/data
+      - code:/app
+      - ~/.config/composer/auth.json:/var/www/.composer/auth.json:ro
+      - ${PWD}/taktik/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
+      - ${PWD}/taktik/php/conf.d/zz-application.ini:/usr/local/etc/php/conf.d/zz-application:ro
+      - ${PWD}/taktik/php/php-fpm.d/zz-docker.ini:/usr/local/etc/php-fpm.d/zz-docker.ini:ro
+      - ${PWD}/taktik/php/entrypoint.sh:/taktik/php/entrypoint.sh:ro
+    ports:
+      - 2222:2222
+    networks:
+      default:
+        aliases:
+          - php.taktik.internal
+  
+  nginx:
+    image: nginx:1.21
+    volumes:
+      - code:/app
 
 volumes:
-  redis:
+  code:
+    driver: local
+    driver_opts:
+      type: none
+      o: 'bind'
+      device: ${PWD}/.
