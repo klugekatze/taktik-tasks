@@ -61,7 +61,7 @@ tasks:
   rebuild:
     desc: "Rebuild containers: down, build. up"
     cmds:
-      - task: stop
+      - task: down
       - task: build
       - task: up
 
