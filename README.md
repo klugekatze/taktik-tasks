@@ -6,7 +6,7 @@ Taktik Tasks is template of [Taskfile](https://taskfile.dev) with predefined tas
 
 ## Motivation
 
-My primary development environment were vagrant based VirtualBox VM. It still nice, provide food shell experience and isolation, hovewer, VirtualBox is not compatible with Apple M1 chip. I tried many tools: self-made shell scripts, node with google zx library, Lando and others. Shell scripts quickly become a unmaintainable. Node scripts require installing dependencies if. The most successful is Lando. Hoverer, the number of custom cludges I had to put for Lando become too quickly too big. In addition, мery poor performance on mounted volumes mac os and the impossibility / high complexity of the configuration forced to look for other tools. From Lando I like an Idea of yaml config and tooling feature.
+My primary development environment were vagrant based VirtualBox VM. It still nice, provide food shell experience and isolation, hovewer, VirtualBox is not compatible with Apple M1 chip. I tried many tools: self-made shell scripts, node with google zx library, Lando and others. Shell scripts quickly become a unmaintainable. Node scripts require installing dependencies if. The most successful is Lando. Hoverer, the number of custom kludges I had to put for Lando become too quickly too big. In addition, мery poor performance on mounted volumes mac os and the impossibility / high complexity of the configuration forced to look for other tools. From Lando I like an Idea of yaml config and tooling feature.
 
 ## Quick start
 
