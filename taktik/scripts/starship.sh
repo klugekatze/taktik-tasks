@@ -2,6 +2,8 @@
 
 set -e
 
+USERNAME=${1:-"www-data"}
+
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
@@ -10,13 +12,19 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+if [ "${USERNAME}" = "root" ]; then
+    user_rc_path="/root"
+else
+    user_rc_path="/home/${USERNAME}"
+fi
+
 sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- --yes
 
-echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+echo 'eval "$(starship init zsh)"' >> ${user_rc_path}/.zshrc
 
 # mkdir -p "~/.config"
 
-# cat <<'EOF' > ~/.config/starship.toml
+# cat <<'EOF' > ${user_rc_path}/.config/starship.toml
 #     add_newline = false
 #     [character]
 #     success_symbol = "[➜](bold green) "
