@@ -5,4 +5,4 @@ COMPOSE_OPTIONS=--env-file=/dev/null -f docker-compose.yaml
 # Recommended macos variables
 #
 #COMPOSE_OPTIONS=--env-file=/dev/null -f docker-compose.yaml -f docker-compose.macosx.yaml
-#COMPOSE_BINARY=mutagen
+#COMPOSE_BINARY=mutagen compose
