@@ -4,7 +4,8 @@ services:
     image: sunthera/taktik:dev
     build:
       context: .
-      dockerfile: Dockerfile.taktik
+      dockerfile: Dockerfile
+      target: dev
     entrypoint:
       - bash
       - /taktik/php/entrypoint.sh

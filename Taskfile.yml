@@ -83,18 +83,18 @@ tasks:
   exec:php:
     desc: Exec into php container
     cmds:
-      - "{{.COMPOSE_COMMAND_STUB}} exec -w /app php zsh"
+      - "{{.COMPOSE_COMMAND_STUB}} exec -w /app -u taktik php zsh"
 
   php:
     desc: Run php in container
     cmds:
-      - "{{.COMPOSE_COMMAND_STUB}} exec -w /app php php {{.COMMAND_OPTIONS}}"
+      - "{{.COMPOSE_COMMAND_STUB}} exec -w /app -u taktik php php {{.COMMAND_OPTIONS}}"
     vars:
       COMMAND_OPTIONS: "{{.PHP_OPTIONS}} {{.CLI_ARGS}}"
 
   composer:
     desc: Composer
     cmds:
-      - "{{.COMPOSE_COMMAND_STUB}} exec -w /app php composer {{.COMMAND_OPTIONS}}"
+      - "{{.COMPOSE_COMMAND_STUB}} exec -w /app -u taktik php composer {{.COMMAND_OPTIONS}}"
     vars:
       COMMAND_OPTIONS: "{{.COMPOSER_OPTIONS}} {{.CLI_ARGS}}"
