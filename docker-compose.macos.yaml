@@ -6,7 +6,15 @@ x-mutagen:
     defaults:
       ignore:
         vcs: true
+        paths:
+          - .idea
+          - node_modules
       mode: "two-way-resolved"
+      symlink:
+        mode: "posix-raw"
+      permissions:
+        defaultDirectoryMode: 755
+        defaultFileMode: 644
     
     code:
       alpha: "."
