@@ -50,6 +50,9 @@ tasks:
       - "{{.COMPOSE_COMMAND_STUB}} build {{.COMMAND_OPTIONS}}"
     vars:
       COMMAND_OPTIONS: "{{.BUILD_OPTIONS}} {{.CLI_ARGS}}"
+    env:
+      COMPOSE_DOCKER_CLI_BUILD: 1
+      DOCKER_BUILDKIT: 1
 
   restart:
     desc: "Remove stopped containers"
